@@ -1,0 +1,42 @@
+@import "./tailwind/_base.css";
+@import "./tailwind/_components.css";
+@import "./tailwind/_utilities.css";
+
+@font-face {
+    font-family: "mona_sans";
+    src: url('../fonts/Mona-Sans.woff');
+}
+
+body {
+    font-family: "mona_sans", arial, sans-serif;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    height: 0.75rem;
+    width: 0.75rem;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 0.5rem;
+    --tw-bg-opacity: 1;
+    background-color: rgb(190 242 100 / var(--tw-bg-opacity));
+    --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.cls-1 {
+    fill: url(#linear-gradient);
+}
+
+.cls-2 {
+    fill: url(#radial-gradient-2);
+}
+
+.cls-3 {
+    fill: url(#linear-gradient-2);
+}
+
+.cls-4 {
+    fill: url(#radial-gradient);
+}
