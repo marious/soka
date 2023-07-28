@@ -13,12 +13,12 @@ import "./choices.scss";
 import TomatoRoles from "../../vendor/tomatophp/tomato-components/resources/js/components/TomatoRoles.vue";
 import TomatoRepeater from "../../vendor/tomatophp/tomato-components/resources/js/components/TomatoRepeater.vue";
 // import TomatoColor from "../../vendor/tomatophp/tomato-components/resources/js/components/TomatoColor.vue";
-import TomatoRich from "../../vendor/tomatophp/tomato-components/resources/js/components/TomatoRich.vue";
+// import TomatoRich from "../../vendor/tomatophp/tomato-components/resources/js/components/TomatoRich.vue";
 import TomatoTel from "../../vendor/tomatophp/tomato-components/resources/js/components/TomatoTel.vue";
 // import TomatoSelect from "../../vendor/tomatophp/tomato-components/resources/js/components/TomatoSelect.vue";
 // import TomatoArtisan from "../../vendor/tomatophp/tomato-components/resources/js/components/TomatoArtisan.vue";
 // import TomatoCode from "../../vendor/tomatophp/tomato-components/resources/js/components/TomatoCode.vue";
-import TomatoDraggable from "../../vendor/tomatophp/tomato-components/resources/js/components/TomatoDraggable.vue";
+// import TomatoDraggable from "../../vendor/tomatophp/tomato-components/resources/js/components/TomatoDraggable.vue";
 
 const Tomato = {
     install(app, options) {
@@ -42,12 +42,12 @@ createApp({
         transform_anchors: false,
         progress_bar: true,
     })
-    .component("TomatoDraggable", TomatoDraggable)
+    // .component("TomatoDraggable", TomatoDraggable)
     .component("TomatoRoles", TomatoRoles)
     .component("TomatoRepeater", TomatoRepeater)
     // .component("TomatoColor", TomatoColor)
     .component("TomatoTel", TomatoTel)
-    .component("TomatoRich", TomatoRich)
+    // .component("TomatoRich", TomatoRich)
     // .component("TomatoSelect", TomatoSelect)
     // .component("TomatoArtisan", TomatoArtisan)
     // .component("TomatoCode", TomatoCode)
