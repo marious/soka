@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Modules\Players\Entities\PlayerVideo;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,13 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('test22', function () {
+   $playerVideos = PlayerVideo::all();
+   foreach ($playerVideos as $playerVideo) {
+       $playerVideo->video_url = 'https://youtu.be/' . $playerVideo->video_code;
+       $playerVideo->save();
+   }
+});
 
 Route::middleware('splade')->group(function () {
     // Registers routes to support password confirmation in Form and Link components...

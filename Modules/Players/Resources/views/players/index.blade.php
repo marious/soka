@@ -21,7 +21,7 @@
                                 <span>{{trans('tomato-admin::global.crud.view')}}</span>
                             </div>
                         </Link>
-                        <Link href="/admin/players/{{ $item->id }}/edit" class="px-2 text-yellow-400" slideover>
+                        <Link href="/admin/players/{{ $item->id }}/edit" class="px-2 text-yellow-400">
                             <div class="flex justify-start space-x-2">
                                 <x-heroicon-s-pencil class="h-4 w-4 ltr:mr-2 rtl:ml-2"/>
                                 <span>{{trans('tomato-admin::global.crud.edit')}}</span>

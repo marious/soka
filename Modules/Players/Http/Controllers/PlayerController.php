@@ -64,19 +64,12 @@ class PlayerController extends Controller
 
         if ($playerVideos) {
             foreach ($playerVideos as $key => $playerVideo) {
-                  $videoCode = str_replace('https://youtu.be/', '', $playerVideo['video_code']);
-                $player->playerVideos()->create(['video_code' => $videoCode]);
+                $videoCode = str_replace('https://youtu.be/', '', $playerVideo['video_code']);
+                $player->playerVideos()->create(['video_code' => $videoCode, 'video_url' => $playerVideo['video_code']]);
             }
         }
         Toast::success(__('Player created successfully'))->autoDismiss(3);
         return to_route('admin.players.index');
-//        $response = Tomato::store(
-//            request: $request,
-//            model: \Modules\Players\Entities\Player::class,
-//            message: __('Player created successfully'),
-//            redirect: 'admin.players.index',
-//        );
-
     }
 
     /**
@@ -97,6 +90,7 @@ class PlayerController extends Controller
      */
     public function edit(\Modules\Players\Entities\Player $model): View
     {
+        $model->playerVideos = $model->playerVideos->map->only('video_url')->flatten()->toArray();
         return Tomato::get(
             model: $model,
             view: 'players::players.edit',
@@ -110,14 +104,16 @@ class PlayerController extends Controller
      */
     public function update(\Modules\Players\Http\Requests\Player\PlayerUpdateRequest $request, \Modules\Players\Entities\Player $model): RedirectResponse
     {
-        $response = Tomato::update(
-            request: $request,
-            model: $model,
-            message: __('Player updated successfully'),
-            redirect: 'admin.players.index',
-        );
-
-        return $response['redirect'];
+        $model->update($request->all());
+        if ($request->playerVideos) {
+            $model->playerVideos()->delete();
+            foreach ($request->playerVideos as $key => $playerVideo) {
+                $videoCode = str_replace('https://youtu.be/', '', $playerVideo);
+                $model->playerVideos()->create(['video_code' => $videoCode, 'video_url' => $playerVideo]);
+            }
+        }
+        Toast::success( __('Player updated successfully'))->autoDismiss(3);
+        return to_route('admin.players.index');
     }
 
     /**
