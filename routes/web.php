@@ -25,7 +25,7 @@ Route::middleware('splade')->group(function () {
     Route::spladeUploads();
 
     Route::get('/', function () {
-        return view('welcome');
+        return to_route('front.players');
     });
 
 //    Route::middleware('auth')->group(function () {
