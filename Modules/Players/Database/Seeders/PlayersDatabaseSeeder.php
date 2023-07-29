@@ -6,6 +6,7 @@ use App\Support\Translator;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Players\Entities\Player;
+use Modules\Players\Entities\PlayerVideo;
 use Modules\Teams\Entities\Team;
 
 class PlayersDatabaseSeeder extends Seeder
@@ -46,7 +47,18 @@ class PlayersDatabaseSeeder extends Seeder
                 ];
             }
 
-          Player::insert($players);
+            Player::insert($players);
+
+            $players = Player::take(10)->get();
+            foreach ($players as $player) {
+                PlayerVideo::insert([
+                    ['video_code' => 'KMXnEpUxNz8', 'player_id' => $player->id],
+                    ['video_code' => 'jP7AtTj8vUQ', 'player_id' => $player->id],
+                    ['video_code' => 'OWOjRdmpM6I', 'player_id' => $player->id],
+                    ['video_code' => 'DQ3jAuEDVT0', 'player_id' => $player->id],
+                ]);
+
+            }
 
         }
 

@@ -378,6 +378,9 @@
                             </tr>
 
                         </template>
+                        <template v-slot:shimmer>
+                            <PlayerShimmer v-bind:count="20" />
+                        </template>
                     </InfinityScroll>
 
             </tbody>
