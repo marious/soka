@@ -13,7 +13,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Players\Http\Controllers\Front\PlayersFrontController;
-
+use Modules\Players\Http\Controllers\Front\PlayerVideoController;
 
 
 Route::middleware(['auth', 'splade', 'verified'])->name('admin.')->group(function () {
@@ -31,5 +31,6 @@ Route::middleware(['auth', 'splade', 'verified'])->name('admin.')->group(functio
 Route::middleware(['splade', 'front'])->group(function () {
     Route::get('players', [PlayersFrontController::class, 'index'])->name('front.players');
     Route::get('players/api', [PlayersFrontController::class, 'api'])->name('front.players.api');
+    Route::get('players/{player}/video', PlayerVideoController::class)->name('front.player.video');
     Route::get('players/{player}', [PlayersFrontController::class, 'show'])->name('front.players.show');
 });

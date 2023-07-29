@@ -886,7 +886,44 @@
             <!-- third column -->
             <div>
                <div class="flex justify-center">
-                   <img src="{{ url('assets/images/video-bg-1.png') }}" alt="" >
+                   <x-splade-link href="{{ route('front.player.video', $player->id) }}" modal>
+                       <div class="relative border-[#6e8e9c] border-4 rounded-md">
+                           <img src="{{ url('assets/images/video-bg-1.jpg') }}" alt=""
+                                class="">
+                           <div class="absolute top-0 bg-black bg-opacity-75 w-full p-1 rounded-md">
+
+                               <div class="flex justify-between">
+                                   <div>
+                                       <div class="flex mt-2 mb-2">
+                                           <div class="w-4 h-6 mr-2">
+                                               <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0" y="0"
+                                                    viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve">
+                                            <g id="XMLID_00000093156248264949356020000012658668346877317530_">
+                                                <path class="fill-red-500"
+                                                      d="M126.3 15.8 182 0c27.4 32.5 118 35.7 148.2.6L332 0l58.9 17c17.8 5.2 34.4 13.9 48.8 25.6l47 38.5-38.5 95L407 153c-14-7.9-30.2 7.7-29.9 23.3l-.3 335.7H106V152l-69 40-37-88 68.8-57.7c16.8-14.2 36.4-24.6 57.5-30.5z"/>
+                                                <path class="fill-yellow-300"
+                                                      d="M407 153v359h-30.2l.2-335.7c-.2-15.6 16-31.2 30-23.3zM512 102l-36 90-27.8-15.7 38.5-95.1z"/>
+                                            </g>
+                                        </svg>
+                                           </div>
+                                           <div class="absolute w-6 text-[9px] text-center mt-1"><span>{{ random_int(1, 30) }}</span></div>
+                                           <p class="text-white font-bold text-sm">{{ $player->name }}</p>
+                                       </div>
+
+                                       <div class="text-white ml-2 font-bold text-sm">12 Assists</div>
+                                   </div>
+
+                                   <div class="w-10 h-10 rounded-full bg-[#d7f205] flex justify-center items-center
+                                   mt-1">
+                                       <svg fill="#000" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler
+                                       icon-tabler-player-play" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"> <path stroke="none" d="M0 0h24v24H0z" fill="none"/> <path d="M7 4v16l13 -8z" /> </svg>
+                                   </div>
+                               </div>
+
+                           </div>
+                       </div>
+
+                   </x-splade-link>
                </div>
 
                 <div class="flex justify-center mt-5">
