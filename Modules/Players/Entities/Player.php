@@ -28,12 +28,17 @@ class Player extends Model
     /**
      * @var array
      */
-        protected $fillable = ['team_id', 'name', 'dob', 'position', 'height', 'matches', 'soka_score', 'attacking', 'defensive', 'passing', 'possession', 'created_at', 'updated_at'];
+    protected $fillable = ['team_id', 'name', 'dob', 'position', 'height', 'matches', 'soka_score', 'attacking', 'defensive', 'passing', 'possession', 'created_at', 'updated_at'];
 
 
     public function team()
     {
         return $this->belongsTo(Team::class);
+    }
+
+    public function playerVideos()
+    {
+        return $this->hasMany(PlayerVideo::class);
     }
 
     public function getAgeAttribute()

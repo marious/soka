@@ -7,6 +7,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Modules\Players\Entities\Player;
+use ProtoneMedia\Splade\Facades\Toast;
 use TomatoPHP\TomatoPHP\Services\Tomato;
 
 class PlayerController extends Controller
@@ -52,14 +54,29 @@ class PlayerController extends Controller
      */
     public function store(\Modules\Players\Http\Requests\Player\PlayerStoreRequest $request): RedirectResponse
     {
-        $response = Tomato::store(
-            request: $request,
-            model: \Modules\Players\Entities\Player::class,
-            message: __('Player created successfully'),
-            redirect: 'admin.players.index',
-        );
+        $playerVideos = [];
 
-        return $response['redirect'];
+        if ($request->playerVideos) {
+            $playerVideos = $request->playerVideos;
+        }
+
+        $player = Player::create($request->all());
+
+        if ($playerVideos) {
+            foreach ($playerVideos as $key => $playerVideo) {
+                  $videoCode = str_replace('https://youtu.be/', '', $playerVideo['video_code']);
+                $player->playerVideos()->create(['video_code' => $videoCode]);
+            }
+        }
+        Toast::success(__('Player created successfully'))->autoDismiss(3);
+        return to_route('admin.players.index');
+//        $response = Tomato::store(
+//            request: $request,
+//            model: \Modules\Players\Entities\Player::class,
+//            message: __('Player created successfully'),
+//            redirect: 'admin.players.index',
+//        );
+
     }
 
     /**

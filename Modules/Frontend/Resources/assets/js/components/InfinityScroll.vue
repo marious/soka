@@ -8,9 +8,7 @@
     <!--        </svg>-->
     <!--    </div>-->
 
-    <div v-if="loading">
-        <slot name="shimmer"/>
-    </div>
+    <slot name="shimmer" v-if="loading"/>
 
     <Trigger @triggerIntersected="loadMore"/>
 

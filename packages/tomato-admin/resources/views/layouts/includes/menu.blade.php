@@ -29,6 +29,7 @@
 @else
     @php $counter = 0; @endphp
     @foreach($menus as $menu)
+        @can(strtolower($menu['label']))
         <button @click.prevent="
         $helpers.setAsideMenuGroup('{{str_replace(" ", "_", $menu["label"])}}', true);
         data.asideMenuGroup['{{str_replace(" ", "_", $menu["label"])}}'] =
@@ -53,12 +54,15 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
             </svg>
         </button>
+        @endcan
 
         <div>
             <ul class="mx-3 mt-2 space-y-1 text-sm"
                 v-if="data.asideMenuGroup"
                 v-show="data.asideMenuGroup['{{str_replace(" ", "_", $menu["label"])}}'] || data.makeMenuMin ">
                 @foreach($menu['items'] as $item)
+                    @can($item->route)
+
                     <li class="filament-sidebar-item "  title="{{$item->label}}">
                         <Link
                             href="{{$item->route ? route($item->route) : $item->url}}"
@@ -85,14 +89,17 @@
                         </div>
                         </Link>
                     </li>
+                    @endcan
                 @endforeach
 
             </ul>
         </div>
+        @can(strtolower($menu['label']))
         @if($counter !== count($menus)-1)
             <div class="my-6 ml-6 border-t rtl:ml-auto rtl:mr-6 dark:border-gray-700"></div>
         @endif
         @php $counter++; @endphp
+        @endcan
     @endforeach
 @endif
 
