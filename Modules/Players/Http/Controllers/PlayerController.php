@@ -62,6 +62,12 @@ class PlayerController extends Controller
 
         $player = Player::create($request->all());
 
+        if ($request->hasFile('image')) {
+            $player->addMedia($request->image)
+                ->preservingOriginal()
+                ->toMediaCollection('image');
+        }
+
         if ($playerVideos) {
             foreach ($playerVideos as $key => $playerVideo) {
                 $videoCode = str_replace('https://youtu.be/', '', $playerVideo['video_code']);
@@ -93,6 +99,8 @@ class PlayerController extends Controller
         $model->playerVideos = $model->playerVideos->map->only('video_url')->flatten()->toArray();
         return Tomato::get(
             model: $model,
+            hasMedia: true,
+            collection: 'image',
             view: 'players::players.edit',
         );
     }
