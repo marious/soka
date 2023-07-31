@@ -24,7 +24,7 @@ class PlayerStoreRequest extends FormRequest
     public function rules()
     {
         return [
-                        'team_id' => 'required|exists:teams,id',
+            'team_id' => 'required|exists:teams,id',
             'name' => 'required|max:255|string',
             'dob' => 'required',
             'position' => 'required|max:255|string',
@@ -34,7 +34,8 @@ class PlayerStoreRequest extends FormRequest
             'attacking' => 'required',
             'defensive' => 'required',
             'passing' => 'required',
-            'possession' => 'required'
+            'possession' => 'required',
+            'image' => 'nullable|image',
         ];
     }
 }

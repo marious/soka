@@ -5,6 +5,8 @@ namespace Modules\Players\Entities;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Teams\Entities\Team;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * @property integer $id
@@ -23,8 +25,9 @@ use Modules\Teams\Entities\Team;
  * @property string $updated_at
  * @property Team $team
  */
-class Player extends Model
+class Player extends Model implements HasMedia
 {
+    use InteractsWithMedia;
     /**
      * @var array
      */
@@ -44,5 +47,11 @@ class Player extends Model
     public function getAgeAttribute()
     {
         return Carbon::parse($this->dob)->age;
+    }
+
+    public function getImageAttribute()
+    {
+        return $this->getFirstMedia('image') ? $this->getFirstMedia('image')->getUrl() :
+            'https://randomuser.me/api/portraits/men/'.random_int(5, 50).'.jpg';
     }
 }

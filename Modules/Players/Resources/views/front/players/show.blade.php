@@ -47,7 +47,8 @@
     <div class="bg-cyan-900/25 basis-1/6 text-white tracking-wider ml-12 min-h-screen">
         <div class="flex flex-col justify-items-center justify-center items-center">
             <div class="w-1/3 mt-6 mb-5">
-                <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                <x-splade-link href="/">
+                    <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                      viewBox="0 0 278.87 72.7">
                     <defs>
                         <radialGradient id="radial-gradient" cx="28.24" cy="36.35" fx="28.24" fy="36.35" r="32.55"
@@ -92,11 +93,12 @@
                     <path class="cls-2"
                           d="m99.39.13c-19.88,0-36,16.12-36,36s16.12,36,36,36,36-16.12,36-36S119.27.13,99.39.13Zm0,59c-12.7,0-23-10.3-23-23s10.3-23,23-23,23,10.3,23,23-10.3,23-23,23Z"/>
                 </svg>
+                </x-splade-link>
             </div>
 
             <picture>
                 <img loading="lazy" class="h-36 w-36 rounded-full ml-1 mr-3"
-                     src="https://randomuser.me/api/portraits/men/{{random_int(5, 50)}}.jpg"/>
+                     src="{{ $player->image }}"/>
             </picture>
 
             <div class="mt-3 text-center">

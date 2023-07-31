@@ -18,7 +18,7 @@ class PlayerResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'image' => 'https://randomuser.me/api/portraits/men/'.random_int(5, 50).'.jpg',
+            'image' => $this->image,
             'team' => TeamResource::make($this->team),
             'dob' => $this->dob,
             'age' => $this->age,
