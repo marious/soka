@@ -24,7 +24,7 @@ class PlayerUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-                        'team_id' => 'sometimes|exists:teams,id',
+            'team_id' => 'sometimes|exists:teams,id',
             'name' => 'sometimes|max:255|string',
             'dob' => 'sometimes',
             'position' => 'sometimes|max:255|string',
@@ -34,7 +34,8 @@ class PlayerUpdateRequest extends FormRequest
             'attacking' => 'sometimes',
             'defensive' => 'sometimes',
             'passing' => 'sometimes',
-            'possession' => 'sometimes'
+            'possession' => 'sometimes',
+            'image' => 'nullable|image',
         ];
     }
 }

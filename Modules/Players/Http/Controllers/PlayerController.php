@@ -120,7 +120,15 @@ class PlayerController extends Controller
                 $model->playerVideos()->create(['video_code' => $videoCode, 'video_url' => $playerVideo]);
             }
         }
-        Toast::success( __('Player updated successfully'))->autoDismiss(3);
+
+        if ($request->hasFile('image')) {
+            $model->clearMediaCollection('image');
+            $model->addMedia($request->image)
+                ->preservingOriginal()
+                ->toMediaCollection('image');
+        }
+
+        Toast::success(__('Player updated successfully'))->autoDismiss(3);
         return to_route('admin.players.index');
     }
 
