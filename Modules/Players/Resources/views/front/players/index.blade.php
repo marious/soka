@@ -1,4 +1,18 @@
-<div class="flex relative">
+<div class="">
+    <InfinityScroll url="{{ route('front.players.api') }}">
+        <template #default="{handleFormSubmit, data, loading}">
+            @php
+                $default = [
+                    'age' => request()->input('age') ?? null,
+                    'soka_score' => request()->input('soka_score') ?? null,
+                    'height' => request()->input('height') ?? null,
+                    'position' => ['g' => false, 'd' => false, 'm' => false, 'f' => false,],
+                    'sort_by' => 'age',
+                    'sort_type' => 'asc'
+            ];
+            @endphp
+            <x-splade-form preserve-scroll method="get" :default="$default" stay action="{{ route('front.players')
+            }}" class="flex relative w-full">
     <div class="w-12 fixed h-screen">
         <div class="bg-white w-7 h-7 p-0.5 rounded mx-auto mt-3 mb-4">
             <a href="#">
@@ -50,130 +64,13 @@
             </x-splade-link>
         </div>
         <p class="text-sm text-center mb-4"><span class="text-lime-300">384</span> / 1,294 Players</p>
-        <!-- Soka Score -->
-        <x-splade-data default="{direction: 'right', min: 0, max: 100, inputValue: 0}">
-        <div class="filter w-10/12 mx-auto mb-8">
-            <p class="text-sm">Soka Score</p>
-            <input id="filtersokascore"
-                            type="range"
-                            :min="data.min"
-                            :max="data.max"
-                            :value="data.inputValue"
-                            class="rounded-lg
-            appearance-none bg-cyan-900/50 h-1.5 w-full bg-gradient-to-r from-lime-300 to-lime-500 bg-no-repeat" :class="'bg-' + direction + '-top'" x-on:input="inputValue = filtersokascore.value;" :style="{backgroundSize: (max-inputValue) + '%'}" />
-            <p class="text-xs text-right">91%</p>
+        <div class="flex justify-center">
+            <x-splade-link href="{{ route('front.players') }}" class="p-1 bg-red-500 bg-lime-300 rounded
+            text-slate-900">Reset Filter</x-splade-link>
         </div>
-        </x-splade-data>
-
-        <!-- Age -->
-        <x-splade-data default="{direction: 'left', min: 10, max: 25, inputValue: 18}">
-            <div class="filter w-10/12 mx-auto mb-8">
-                <p class="text-sm">Age</p>
-                <input id="filterage"
-                       type="range"
-                       :min="data.min"
-                       :max="data.max"
-                       :value="data.inputValue"
-                       class="rounded-lg appearance-none bg-cyan-900/50
-                       h-1.5 w-full bg-gradient-to-r from-lime-300 to-lime-500 bg-no-repeat"
-                       v-bind:class="`bg-${data.direction}-top`"
-                       v-model="data.inputValue"
-                       v-bind:style="`{backgroundSize: ${data.inputValue}%}`" />
-                <p class="text-xs">
-                    @{{ data.inputValue }}
-                </p>
-            </div>
-        </x-splade-data>
-
-        <x-splade-data default="{g: true, d: true, m: true, f: true, active: 'fill-lime-300', inactive: 'fill-slate-700'}">
-            <div class="filter w-10/12 mx-auto mb-8">
-                <p class="text-sm mb-2">Position</p>
-                <div class="flex relative">
-                    <div class="basis-2/3 mx-auto">
-                        <svg version="1.1" id="svg2" xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="0 0 656.8 491.9" style="enable-background:new 0 0 656.8 491.9" xml:space="preserve">
-                            <g id="layer1">
-                                <g id="g4041" transform="matrix(0 -1.50916 1.50633 0 -115.601 876.12)">
-                                    <path id="path2194" class="fill-none stroke-cyan-900/50 stroke-[10px]" d="M580.5 512.8h-326l.7-435.3 325.3-.7v436z"/>
-                                    <path id="path2212" d="M418.6 261.5c17.9 0 32.5 14.9 32.5 33.2 0 18.4-14.5 33.3-32.5 33.3-17.9 0-32.5-14.9-32.5-33.2 0-18.4 14.5-33.3 32.5-33.3z" class="fill-none stroke-cyan-900/50 stroke-[10px]"/>
-                                    <path id="path2196" class="fill-none stroke-cyan-900/50 stroke-[10px]" d="M490.9 513v-60.6H345.6v60.2"/>
-                                    <path id="path2198" class="fill-none stroke-cyan-900/50 stroke-[10px]" d="M383.8 512.5v-21.1l66.8.7v21.2"/>
-                                    <path id="path2206" class="fill-none stroke-cyan-900/50 stroke-[10px]" d="M443.5 452.5c-11.1-19.2-41-18.4-51.9.1"/>
-                                    <path id="path3091" class="fill-none stroke-cyan-900/50 stroke-[10px]" d="m490.9 77-.1 59.4H345.6V77.2"/>
-                                    <path id="path3093" class="fill-none stroke-cyan-900/50 stroke-[10px]" d="M383.8 76.9v20.5l66.8-.7V77"/>
-                                    <path id="path3097" class="fill-none stroke-cyan-900/50 stroke-[10px]" d="M443.5 136.6c-11.1 19.2-40.6 18.4-51.5-.1"/>
-                                    <path id="path3107" class="fill-none stroke-cyan-900/50 stroke-[10px]" d="M254.6 294.4h325.3"/>
-                                </g>
-                            </g>
-                        </svg>
-                    </div>
-                    <div class="flex flex-row absolute w-full pt-14 place-content-center select-none">
-                        <div class="basis-1/6 flex cursor-pointer place-content-center p-1.5" @click="data.g = !data.g">
-                            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve">
-                                <g id="XMLID_00000093156248264949356020000012658668346877317530_">
-                                    <path :class="data.g ? active : inactive" d="M126.3 15.8 182 0c27.4 32.5 118 35.7
-                                     148.2.6L332 0l58.9 17c17.8 5.2 34.4 13.9 48.8 25.6l47 38.5-38.5 95L407 153c-14-7.9-30.2 7.7-29.9 23.3l-.3 335.7H106V152l-69 40-37-88 68.8-57.7c16.8-14.2 36.4-24.6 57.5-30.5z"/>
-                                    <path :class="data.g ? active : inactive" d="M407 153v359h-30.2l.2-335.7c-.2-15.6
-                                    16-31.2 30-23.3zM512 102l-36 90-27.8-15.7 38.5-95.1z"/>
-                                </g>
-                            </svg>
-                            <div class="absolute w-1/6 text-center text-slate-900 text-lg font-bold mt-1.5"
-                                 :class="data.g || 'text-slate-500'">G</div>
-                        </div>
-                        <div class="basis-1/6 flex cursor-pointer place-content-center p-1.5" @click="data.d = !data.d">
-                            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve">
-                                <g id="XMLID_00000093156248264949356020000012658668346877317530_">
-                                    <path :class="data.d ? active : inactive" d="M126.3 15.8 182 0c27.4 32.5 118 35.7
-                                     148.2.6L332 0l58.9 17c17.8 5.2 34.4 13.9 48.8 25.6l47 38.5-38.5 95L407 153c-14-7.9-30.2 7.7-29.9 23.3l-.3 335.7H106V152l-69 40-37-88 68.8-57.7c16.8-14.2 36.4-24.6 57.5-30.5z"/>
-                                    <path :class="data.d ? active : inactive" d="M407 153v359h-30.2l.2-335.7c-.2-15.6
-                                    16-31.2 30-23.3zM512 102l-36 90-27.8-15.7 38.5-95.1z"/>
-                                </g>
-                            </svg>
-                            <div class="absolute basis-1/6 text-slate-900 text-lg text-center font-bold mt-1.5"
-                                 :class="data.d || 'text-slate-500'">D</div>
-                        </div>
-                        <div class="basis-1/6 flex cursor-pointer place-content-center p-1.5" @click="data.m = !data.m">
-                            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve">
-                                <g id="XMLID_00000093156248264949356020000012658668346877317530_">
-                                    <path :class="data.m ? active : inactive" d="M126.3 15.8 182 0c27.4 32.5 118 35.7
-                                     148.2.6L332 0l58.9 17c17.8 5.2 34.4 13.9 48.8 25.6l47 38.5-38.5 95L407 153c-14-7.9-30.2 7.7-29.9 23.3l-.3 335.7H106V152l-69 40-37-88 68.8-57.7c16.8-14.2 36.4-24.6 57.5-30.5z"/>
-                                    <path :class="data.m ? active : inactive" d="M407 153v359h-30.2l.2-335.7c-.2-15.6
-                                    16-31.2 30-23.3zM512 102l-36 90-27.8-15.7 38.5-95.1z"/>
-                                </g>
-                            </svg>
-                            <div class="absolute basis-1/6 text-slate-900 text-lg text-center font-bold mt-1.5"
-                                 :class="data.m || 'text-slate-500'">M</div>
-                        </div>
-                        <div class="basis-1/6 flex cursor-pointer place-content-center p-1.5" @click="data.f = !data.f">
-                            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve">
-                                <g id="XMLID_00000093156248264949356020000012658668346877317530_">
-                                    <path :class="data.f ? active : inactive" d="M126.3 15.8 182 0c27.4 32.5 118 35.7
-                                     148.2.6L332 0l58.9 17c17.8 5.2 34.4 13.9 48.8 25.6l47 38.5-38.5 95L407 153c-14-7.9-30.2 7.7-29.9 23.3l-.3 335.7H106V152l-69 40-37-88 68.8-57.7c16.8-14.2 36.4-24.6 57.5-30.5z"/>
-                                    <path :class="data.f ? active : inactive" d="M407 153v359h-30.2l.2-335.7c-.2-15.6
-                                    16-31.2 30-23.3zM512 102l-36 90-27.8-15.7 38.5-95.1z"/>
-                                </g>
-                            </svg>
-                            <div class="absolute basis-1/6 text-slate-900 text-lg text-center font-bold mt-1.5"
-                                 :class="data.f || 'text-slate-500'">F</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </x-splade-data>
+        <!-- Soka Score -->
+        @include('players::front.players._filter')
         <!-- Height -->
-        <x-splade-data default="{direction: 'right', min: 0, max: 100, inputValue: 0}">
-            <div class="filter w-10/12 mx-auto mb-8">
-                <p class="text-sm">Height</p>
-                <input id="filterheight"
-                       type="range"
-                       :min="data.min"
-                       :max="data.max"
-                       :value="data.inputValue"
-                       class="rounded-lg appearance-none bg-cyan-900/50
-                       h-1.5 w-full bg-gradient-to-r from-lime-300 to-lime-500 bg-no-repeat" :class="'bg-' + direction + '-top'" x-on:input="inputValue = filterheight.value;" :style="{backgroundSize: (max-inputValue) + '%'}" />
-                <p class="text-xs text-right">192 cm</p>
-            </div>
-        </x-splade-data>
 
         <div class="filter w-10/12 mx-auto mb-8">
             <p class="text-sm mb-2">Preferred Foot</p>
@@ -235,97 +132,169 @@
     </div>
     <div class="flex-auto p-5">
         <table class="text-white tracking-wider table-fixed">
-            <thead class="text-xs text-center text-lime-600 border-b-2 border-lime-500">
+                <thead class="text-xs text-center text-lime-600 border-b-2 border-lime-500">
             <tr>
                 <td class="py-3 bg-slate-900 sticky top-0 z-20">
                     &nbsp;
                 </td>
-                <td class="py-3 bg-slate-900 w-1/12 sticky top-0 cursor-pointer">
+                <td class="py-3 bg-slate-900 w-1/12 sticky top-0 cursor-pointer"  @click="form.sort_by = 'age'; form.sort_type = form.sort_type == 'asc' ? 'desc' :'asc';
+                             handleFormSubmit(form.$all)">
                     <div class="flex place-content-center">
-                        <div class="place-self-center">AGE</div>
+                        <div class="place-self-center"
+                          >AGE</div>
                         <div class="place-self-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                 class="w-5 h-5" v-if="form.sort_by != 'age' || form.sort_type == 'asc'">
                                 <path class="fill-slate-700" fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                            </svg>
+                            <svg v-if="form.sort_by == 'age' && form.sort_type == 'desc'" xmlns="http://www.w3.org/2000/svg"
+                                 fill="currentColor"
+                               viewBox="0 0 20 20" class="w-5 h-5">
+                                <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8
+                                 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z" clip-rule="evenodd" />
                             </svg>
                         </div>
                     </div>
                 </td>
-                <td class="py-3 bg-slate-900 w-1/12 sticky top-0 cursor-pointer">
+                <td class="py-3 bg-slate-900 w-1/12 sticky top-0 cursor-pointer" @click="form.sort_by = 'height'; form.sort_type = form.sort_type == 'asc' ? 'desc' :'asc';
+                             handleFormSubmit(form.$all)">
                     <div class="flex place-content-center">
                         <div class="place-self-center">HEIGHT</div>
                         <div class="place-self-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                 class="w-5 h-5" v-if="form.sort_by != 'height' || form.sort_type == 'asc'">
                                 <path class="fill-slate-700" fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                            </svg>
+                            <svg v-if="form.sort_by == 'height' && form.sort_type == 'desc'" xmlns="http://www.w3.org/2000/svg"
+                                 fill="currentColor"
+                                 viewBox="0 0 20 20" class="w-5 h-5">
+                                <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8
+                                 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z" clip-rule="evenodd" />
                             </svg>
                         </div>
                     </div>
                 </td>
-                <td class="py-3 bg-slate-900 w-1/12 sticky top-0 cursor-pointer">
+                <td class="py-3 bg-slate-900 w-1/12 sticky top-0 cursor-pointer" @click="form.sort_by = 'matches'; form.sort_type = form.sort_type == 'asc' ? 'desc' :'asc';
+                             handleFormSubmit(form.$all)">
                     <div class="flex place-content-center">
                         <div class="place-self-center">MATCHES</div>
                         <div class="place-self-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                 class="w-5 h-5" v-if="form.sort_by != 'matches' || form.sort_type == 'asc'">
                                 <path class="fill-slate-700" fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                            </svg>
+                            <svg v-if="form.sort_by == 'matches' && form.sort_type == 'desc'" xmlns="http://www.w3.org/2000/svg"
+                                 fill="currentColor"
+                                 viewBox="0 0 20 20" class="w-5 h-5">
+                                <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8
+                                 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z" clip-rule="evenodd" />
                             </svg>
                         </div>
                     </div>
                 </td>
-                <td class="py-3 bg-slate-900 w-2/12 sticky top-0 cursor-pointer">
+                <td class="py-3 bg-slate-900 w-2/12 sticky top-0 cursor-pointer"
+                        @click="form.sort_by = 'soka_score'; form.sort_type = form.sort_type == 'asc' ? 'desc' :'asc';
+                             handleFormSubmit(form.$all)">
                     <div class="flex place-content-center">
                         <div class="place-self-center text-lime-500">SOKA SCORE</div>
                         <div class="place-self-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-                                <path class="fill-lime-400" fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                 class="w-5 h-5" v-if="form.sort_by != 'soka_score' || form.sort_type == 'asc'">
+                                <path class="fill-slate-700" fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                            </svg>
+                            <svg v-if="form.sort_by == 'soka_score' && form.sort_type == 'desc'" xmlns="http://www.w3.org/2000/svg"
+                                 fill="currentColor"
+                                 viewBox="0 0 20 20" class="w-5 h-5">
+                                <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8
+                                 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z" clip-rule="evenodd" />
                             </svg>
                         </div>
                     </div>
                 </td>
-                <td class="py-3 bg-slate-900 w-1/12 sticky top-0 cursor-pointer">
+                <td class="py-3 bg-slate-900 w-1/12 sticky top-0 cursor-pointer"  @click="form.sort_by = 'attacking';
+                form.sort_type = form.sort_type == 'asc' ? 'desc' :'asc';
+                             handleFormSubmit(form.$all)">
                     <div class="flex place-content-center">
                         <div class="place-self-center">ATTACKING</div>
                         <div class="place-self-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                 class="w-5 h-5" v-if="form.sort_by != 'attacking' || form.sort_type == 'asc'">
                                 <path class="fill-slate-700" fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                            </svg>
+                            <svg v-if="form.sort_by == 'attacking' && form.sort_type == 'desc'" xmlns="http://www.w3.org/2000/svg"
+                                 fill="currentColor"
+                                 viewBox="0 0 20 20" class="w-5 h-5">
+                                <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8
+                                 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z" clip-rule="evenodd" />
                             </svg>
                         </div>
                     </div>
                 </td>
-                <td class="py-3 bg-slate-900 w-1/12 sticky top-0 cursor-pointer">
+                <td class="py-3 bg-slate-900 w-1/12 sticky top-0 cursor-pointer" @click="form.sort_by = 'defensive';
+                form.sort_type = form.sort_type == 'asc' ? 'desc' :'asc';
+                             handleFormSubmit(form.$all)">
                     <div class="flex place-content-center">
                         <div class="place-self-center">DEFENSIVE</div>
                         <div class="place-self-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                 class="w-5 h-5" v-if="form.sort_by != 'defensive' || form.sort_type == 'asc'">
                                 <path class="fill-slate-700" fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                            </svg>
+                            <svg v-if="form.sort_by == 'defensive' && form.sort_type == 'desc'" xmlns="http://www.w3.org/2000/svg"
+                                 fill="currentColor"
+                                 viewBox="0 0 20 20" class="w-5 h-5">
+                                <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8
+                                 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z" clip-rule="evenodd" />
                             </svg>
                         </div>
                     </div>
                 </td>
-                <td class="py-3 bg-slate-900 w-1/12 sticky top-0 cursor-pointer">
+                <td class="py-3 bg-slate-900 w-1/12 sticky top-0 cursor-pointer" @click="form.sort_by = 'passing';
+                form.sort_type = form.sort_type == 'asc' ? 'desc' :'asc';
+                             handleFormSubmit(form.$all)">
                     <div class="flex place-content-center">
                         <div class="place-self-center">PASSING</div>
                         <div class="place-self-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                 class="w-5 h-5" v-if="form.sort_by != 'passing' || form.sort_type == 'asc'">
                                 <path class="fill-slate-700" fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                            </svg>
+                            <svg v-if="form.sort_by == 'passing' && form.sort_type == 'desc'"
+                                 xmlns="http://www.w3.org/2000/svg"
+                                 fill="currentColor"
+                                 viewBox="0 0 20 20" class="w-5 h-5">
+                                <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8
+                                 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z" clip-rule="evenodd" />
                             </svg>
                         </div>
                     </div>
                 </td>
-                <td class="py-3 bg-slate-900 w-1/12 sticky top-0 cursor-pointer">
+                <td class="py-3 bg-slate-900 w-1/12 sticky top-0 cursor-pointer"  @click="form.sort_by = 'possession';
+                form.sort_type = form.sort_type == 'asc' ? 'desc' :'asc';
+                             handleFormSubmit(form.$all)">
                     <div class="flex place-content-center">
                         <div class="place-self-center">POSSESSION</div>
                         <div class="place-self-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                 class="w-5 h-5" v-if="form.sort_by != 'possession' || form.sort_type == 'asc'">
                                 <path class="fill-slate-700" fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                            </svg>
+                            <svg v-if="form.sort_by == 'possession' && form.sort_type == 'desc'"
+                                 xmlns="http://www.w3.org/2000/svg"
+                                 fill="currentColor"
+                                 viewBox="0 0 20 20" class="w-5 h-5">
+                                <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8
+                                 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z" clip-rule="evenodd" />
                             </svg>
                         </div>
                     </div>
                 </td>
             </tr>
             </thead>
+
             <tbody class="text-sm">
 
-                    <InfinityScroll url="{{ route('front.players.api') }}">
-                        <template #default="{ data, loading}">
+
                             <tr class="border-b border-slate-800 hover:bg-slate-800" v-for="player in data.data" v-bind:key="player.id">
                                 <td class="py-4">
                                     <x-splade-link v-bind:href="`{{ url('players/${player.id}') }}`">
@@ -370,7 +339,7 @@
                                     <span v-text="player.attacking"></span>
                                 </td>
                                 <td class="text-center">
-                                    <span v-ext="player.defensive"></span>
+                                    <span v-text="player.defensive"></span>
                                 </td>
                                 <td class="text-center">
                                     <span v-text="player.passing"></span>
@@ -379,14 +348,11 @@
                                     <span v-text="player.possession"></span>
                                 </td>
                             </tr>
-
-                        </template>
-                        <template v-slot:shimmer>
-                            <PlayerShimmer v-bind:count="20" />
-                        </template>
-                    </InfinityScroll>
-
+                            <PlayerShimmer v-bind:count="20" v-if="loading"/>
             </tbody>
         </table>
     </div>
+            </x-splade-form>
+        </template>
+    </InfinityScroll>
 </div>

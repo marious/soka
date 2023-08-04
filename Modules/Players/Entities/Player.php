@@ -31,7 +31,7 @@ class Player extends Model implements HasMedia
     /**
      * @var array
      */
-    protected $fillable = ['team_id', 'name', 'dob', 'position', 'height', 'matches', 'soka_score', 'attacking', 'defensive', 'passing', 'possession', 'created_at', 'updated_at'];
+    protected $fillable = ['team_id', 'name', 'dob', 'position', 'height', 'matches', 'soka_score', 'attacking', 'defensive', 'passing', 'possession', 'created_at', 'updated_at', 'age'];
 
 
     public function team()
@@ -44,10 +44,10 @@ class Player extends Model implements HasMedia
         return $this->hasMany(PlayerVideo::class);
     }
 
-    public function getAgeAttribute()
-    {
-        return Carbon::parse($this->dob)->age;
-    }
+//    public function getAgeAttribute()
+//    {
+//        return Carbon::parse($this->dob)->age;
+//    }
 
     public function getImageAttribute()
     {

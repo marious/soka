@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
+use Modules\Players\Entities\Player;
 use Modules\Players\Entities\PlayerVideo;
 
 /*
@@ -15,11 +17,16 @@ use Modules\Players\Entities\PlayerVideo;
 |
 */
 Route::get('test22', function () {
-   $playerVideos = PlayerVideo::all();
-   foreach ($playerVideos as $playerVideo) {
-       $playerVideo->video_url = 'https://youtu.be/' . $playerVideo->video_code;
-       $playerVideo->save();
-   }
+//   $playerVideos = PlayerVideo::all();
+//   foreach ($playerVideos as $playerVideo) {
+//       $playerVideo->video_url = 'https://youtu.be/' . $playerVideo->video_code;
+//       $playerVideo->save();
+//   }
+    $players = Player::all();
+    foreach ($players as $player) {
+        $player->age =  Carbon::parse($player->dob)->age;
+        $player->save();
+    }
 });
 
 Route::middleware('splade')->group(function () {
