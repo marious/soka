@@ -187,8 +187,8 @@
         </div>
 
         <div class="mt-5 ml-10">
-            <h2 class="text-3xl text-white">8 Matches</h2>
-            <h2 class="text-white text-xl">642 Minutes</h2>
+            <h2 class="text-3xl text-white">{{ $player->payload['matches_played'] }} Matches</h2>
+            <h2 class="text-white text-xl">{{ $player->payload['minutes_played'] }} Minutes</h2>
         </div>
 
         <div class="flex px-[30px] pt-5">
@@ -237,9 +237,9 @@
 
     <div class="basis-5/6 py-8 px-12">
         <h2 class="text-white text-4xl">
-            20 Goals Contributions
+            {{ $player->payload['goal_contributions'] }} Goals Contributions
         </h2>
-        <p class="text-s text-gray-600">Team Goals: 50</p>
+        <p class="text-s text-gray-600">Team Goals: {{ $player->payload['team_goals'] }}</p>
         <div class="w-[400px] h-[7px] mt-2 flex">
             <div class="basis-1/3 bg-[#12681a] rounded-l border-1"></div>
             <div class="basis-2/3 bg-[#21aa2e]"></div>
@@ -252,13 +252,13 @@
                     <div>
                         <div class="grid grid-cols-4">
                             <h3 class="text-white text-center col-start-2 col-end-3 flex flex-col">
-                                <span class="text-[100px]">5</span>
+                                <span class="text-[100px]">{{ $player->payload['goals'] }}</span>
                                 <span class="-mt-8 text-2xl">Goals</span>
                             </h3>
                             <div class="col-start-4 bg-[#002729] p-1">
                                 <div class="h-[170px] border-r-[1px] border-[#7aff87] flex flex-col justify-center">
                                     <h3 class="text-center text-sm text-[#7aff87] pt-2">
-                                        0.5
+                                        {{ $player->payload['goals_per_90_minutes'] }}
                                         <br>
                                         / 90 mins
                                     </h3>
@@ -269,13 +269,13 @@
                     </div>
                     <div
                         class="mt-5 bg-[#002f31] px-4 pt-2 pb-4 border-[#59d3d9] border-2 rounded-md shadow-[#59d3d9] shandow-lg">
-                        <h3 class="text-white">12 Penalties</h3>
+                        <h3 class="text-white"> {{ $player->payload['penalties'] }} Penalties</h3>
                         <div class="flex mt-5 text-white">
                             <div class="h-[25px] basis-2/3 rounded-1 border-1 bg-[#38b745] rounded-l-full">
-                                <span class="p-3">3</span>
+                                <span class="p-3"> {{ $player->payload['penalties_on_target'] }}</span>
                             </div>
                             <div class="h-[25px] basis-1/3 rounded-1 border-1 bg-[#d9513b] rounded-r-full text-right">
-                                <span class="p-3">9</span>
+                                <span class="p-3">{{ $player->payload['penalties_off_target'] }}</span>
                             </div>
                         </div>
                         <div class="flex mt-2 justify-between text-[#73b9bc] text-xs">
@@ -284,13 +284,13 @@
                         </div>
                     </div>
                     <div class="mt-5 bg-[#002f31] px-4 pt-2 pb-4  rounded-md">
-                        <h3 class="text-white">12 Shots</h3>
+                        <h3 class="text-white">{{ $player->payload['shots'] }} Shots</h3>
                         <div class="flex mt-5 text-white">
                             <div class="h-[25px] basis-2/3 rounded-1 border-1 bg-[#38b745] rounded-l-full">
-                                <span class="p-3">3</span>
+                                <span class="p-3">{{ $player->payload['shots_on_target'] }}</span>
                             </div>
                             <div class="h-[25px] basis-1/3 rounded-1 border-1 bg-[#d9513b] rounded-r-full text-right">
-                                <span class="p-3">9</span>
+                                <span class="p-3">{{ $player->payload['shots_off_target'] }}</span>
                             </div>
                         </div>
                         <div class="flex mt-2 justify-between text-[#73b9bc] text-xs">
@@ -304,15 +304,16 @@
                 <div class="mt-5 bg-[#002f31] rounded-md">
                     <div class="flex">
                         <div class="basis-3/4 p-4">
-                            <div class="flex justify-between"><h3 class="text-white">12 Shots</h3>
-                                <h3><span class="text-white">0.5</span> <span class="text-gray-600">/ 90mins</span></h3>
+                            <div class="flex justify-between"><h3 class="text-white">{{ $player->payload['passes'] }}
+                                    passes</h3>
+                                <h3><span class="text-white">0.5</span> <span class="text-gray-600">{{ $player->payload['goals_per_90_minutes'] }}/ 90mins</span></h3>
                             </div>
                             <div class="flex mt-5 text-white">
                                 <div class="h-[25px] basis-2/3 rounded-1 border-1 bg-[#38b745] rounded-l-full"><span
-                                        class="p-3">3</span></div>
+                                        class="p-3">{{ $player->payload['penalties_on_target'] }} </span></div>
                                 <div
                                     class="h-[25px] basis-1/3 rounded-1 border-1 bg-[#d9513b] rounded-r-full text-right">
-                                    <span class="p-3">9</span></div>
+                                    <span class="p-3">{{ $player->payload['penalties_off_target'] }} </span></div>
                             </div>
                             <div class="flex mt-2 justify-between text-[#73b9bc] text-xs">
                                 <div>Complete</div>
@@ -321,7 +322,7 @@
                         </div>
                         <div class="basis-1/4 bg-[#002729] p-2">
                             <div class="h-full border-r-[2px] border-[#ff755e]"><h3
-                                    class="text-center text-sm text-[#ff755e] pt-5"> 26% <br> Accuracy </h3></div>
+                                    class="text-center text-sm text-[#ff755e] pt-5"> {{ $player->payload['pass_accuracy'] }} % <br> Accuracy </h3></div>
                         </div>
                     </div>
                 </div>
@@ -332,10 +333,10 @@
                             <h3 class="text-white">Receptions</h3>
                             <div class="flex mt-5 text-white">
                                 <div class="h-[25px] basis-2/3 rounded-1 border-1 bg-[#38b745] rounded-l-full"><span
-                                        class="p-3">3</span></div>
+                                        class="p-3">{{ $player->payload['receptions_successful'] }} </span></div>
                                 <div
                                     class="h-[25px] basis-1/3 rounded-1 border-1 bg-[#d9513b] rounded-r-full text-right">
-                                    <span class="p-3">9</span></div>
+                                    <span class="p-3">{{ $player->payload['receptions_unsuccessful'] }}</span></div>
                             </div>
                             <div class="flex mt-2 justify-between text-[#73b9bc] text-xs">
                                 <div>Successful</div>
@@ -344,7 +345,7 @@
                         </div>
                         <div class="basis-1/4 bg-[#002729] p-2">
                             <div class="h-full border-r-[2px] border-[#ff755e]"><h3
-                                    class="text-center text-sm text-[#ff755e] pt-5"> 26% <br> Accuracy </h3></div>
+                                    class="text-center text-sm text-[#ff755e] pt-5"> {{ $player->payload['receptions_success_rate'] }}% <br> Accuracy </h3></div>
                         </div>
                     </div>
                 </div>
@@ -355,19 +356,19 @@
                             <h3 class="text-white">Offsides</h3>
                             <div class="flex mt-5 text-white">
                                 <div class="h-[25px] basis-2/3 rounded-1 border-1 bg-[#38b745] rounded-l-full"><span
-                                        class="p-3">3</span></div>
+                                        class="p-3">{{ $player->payload['beat_offside_trap'] }}</span></div>
                                 <div
                                     class="h-[25px] basis-1/3 rounded-1 border-1 bg-[#d9513b] rounded-r-full text-right">
-                                    <span class="p-3">9</span></div>
+                                    <span class="p-3">{{ $player->payload['fell_offside'] }}</span></div>
                             </div>
                             <div class="flex mt-2 justify-between text-[#73b9bc] text-xs">
-                                <div>Complete</div>
-                                <div>Incomplete</div>
+                                <div>Beat Trap</div>
+                                <div>Fell Offside</div>
                             </div>
                         </div>
                         <div class="basis-1/4 bg-[#002729] p-2">
                             <div class="h-full border-r-[2px] border-[#ff755e]"><h3
-                                    class="text-center text-sm text-[#ff755e] pt-5"> 26% <br> Accuracy </h3></div>
+                                    class="text-center text-sm text-[#ff755e] pt-5"> {{ $player->payload['offside_success_rate'] }}% <br> Accuracy </h3></div>
                         </div>
                     </div>
                 </div>
@@ -377,12 +378,13 @@
                     <div class="grid grid-cols-2 gap-2">
                         <div class="bg-[#002729] flex rounded">
                             <div class="bg-[#002f31] pt-4 px-5 pb-8 border-r-[2px] border-[#093545]">
-                                <h3 class="text-white text-l text-center">12 <br> Fouls Won</h3>
+                                <h3 class="text-white text-l text-center">{{ $player->payload['fouls_won'] }} <br>
+                                    Fouls Won</h3>
                             </div>
                             <div class="grow p-2">
                                 <div class="h-full border-r-[2px] border-[#7aff87]">
                                     <h3 class="text-center text-sm text-[#7aff87] pt-5">
-                                        0.5
+                                        {{ $player->payload['fouls_won_per_90_minutes'] }}
                                         <br>
                                         / 90 mins
                                     </h3>
@@ -391,12 +393,13 @@
                         </div>
                         <div class="bg-[#002729] flex rounded">
                             <div class="bg-[#002f31] pt-4 px-5 pb-8 border-r-[2px] border-[#093545]">
-                                <h3 class="text-white text-l text-center">12 <br> Penalties<br> Won</h3>
+                                <h3 class="text-white text-l text-center">{{ $player->payload['penalties_won'] }} <br>
+                                    Penalties<br> Won</h3>
                             </div>
                             <div class="grow p-2">
                                 <div class="h-full border-r-[2px] border-[#7aff87]">
                                     <h3 class="text-center text-sm text-[#7aff87] pt-5">
-                                        0.5
+                                      {{ $player->payload['penalties_won_per_90_minutes'] }}
                                         <br>
                                         / 90 mins
                                     </h3>
@@ -408,12 +411,12 @@
                     <div class="grid grid-cols-2 gap-2 mt-2">
                         <div class="bg-[#002729] flex rounded">
                             <div class="bg-[#002f31] pt-4 px-5 pb-8 border-r-[2px] border-[#093545]">
-                                <h3 class="text-white text-l text-center">12 <br> Fouls <br> Committed</h3>
+                                <h3 class="text-white text-l text-center"> {{ $player->payload['fouls_committed'] }} <br> Fouls <br> Committed</h3>
                             </div>
                             <div class="grow p-2">
                                 <div class="h-full border-r-[2px] border-[#7aff87]">
                                     <h3 class="text-center text-sm text-[#7aff87] pt-5">
-                                        0.5
+                                        {{ $player->payload['fouls_committed_per_90_minutes'] }}
                                         <br>
                                         / 90 mins
                                     </h3>
@@ -422,12 +425,12 @@
                         </div>
                         <div class="bg-[#002729] flex rounded">
                             <div class="bg-[#002f31] pt-4 px-5 pb-8 border-r-[2px] border-[#093545]">
-                                <h3 class="text-white text-l text-center">12 <br> Penalties <br> Committed</h3>
+                                <h3 class="text-white text-l text-center"> {{ $player->payload['penalties_committed'] }} <br> Penalties <br> Committed</h3>
                             </div>
                             <div class="grow p-2">
                                 <div class="h-full border-r-[2px] border-[#7aff87]">
                                     <h3 class="text-center text-sm text-[#7aff87] pt-5">
-                                        0.5
+                                        {{ $player->payload['penalties_committed_per_90_minutes'] }}
                                         <br>
                                         / 90 mins
                                     </h3>
@@ -700,15 +703,15 @@
                     <div class="flex">
                         <div class="basis-3/4 p-4">
                             <div class="flex justify-between">
-                                <h3 class="text-white">15 Dribbles</h3>
-                                <h3><span class="text-white">0.5</span> <span class="text-gray-600">/ 90mins</span></h3>
+                                <h3 class="text-white">{{ $player->payload['dribbles'] }} Dribbles</h3>
+                                <h3><span class="text-white">{{ $player->payload['dribbles_per_90_minutes'] }}</span> <span class="text-gray-600">/ 90mins</span></h3>
                             </div>
                             <div class="flex mt-5 text-white">
                                 <div class="h-[25px] basis-2/3 rounded-1 border-1 bg-[#38b745] rounded-l-full"><span
-                                        class="p-3">3</span></div>
+                                        class="p-3">{{ $player->payload['dribbles_successful'] }}</span></div>
                                 <div
                                     class="h-[25px] basis-1/3 rounded-1 border-1 bg-[#d9513b] rounded-r-full text-right">
-                                    <span class="p-3">9</span></div>
+                                    <span class="p-3">{{ $player->payload['dribbles_unsuccessful'] }}</span></div>
                             </div>
                             <div class="flex mt-2 justify-between text-[#73b9bc] text-xs">
                                 <div>Complete</div>
@@ -717,7 +720,7 @@
                         </div>
                         <div class="basis-1/4 bg-[#002729] p-2">
                             <div class="h-full border-r-[2px] border-[#ff755e]"><h3
-                                    class="text-center text-sm text-[#ff755e] pt-5"> 26% <br> Accuracy </h3></div>
+                                    class="text-center text-sm text-[#ff755e] pt-5"> {{ $player->payload['dribbles_accuracy'] }}% <br> Accuracy </h3></div>
                         </div>
                     </div>
                 </div>
@@ -726,15 +729,15 @@
                     <div class="flex">
                         <div class="basis-3/4 p-4">
                             <div class="flex justify-between">
-                                <h3 class="text-white">12 Duels</h3>
-                                <h3><span class="text-white">0.5</span> <span class="text-gray-600">/ 90mins</span></h3>
+                                <h3 class="text-white">{{ $player->payload['tackles'] }} Duels</h3>
+                                <h3><span class="text-white">0.5</span> <span class="text-gray-600">{{ $player->payload['duels_per_90_minutes'] }}/ 90mins</span></h3>
                             </div>
                             <div class="flex mt-5 text-white">
                                 <div class="h-[25px] basis-2/3 rounded-1 border-1 bg-[#38b745] rounded-l-full"><span
-                                        class="p-3">3</span></div>
+                                        class="p-3">{{ $player->payload['duels_won'] }}</span></div>
                                 <div
                                     class="h-[25px] basis-1/3 rounded-1 border-1 bg-[#d9513b] rounded-r-full text-right">
-                                    <span class="p-3">9</span></div>
+                                    <span class="p-3">{{ $player->payload['duels_lost'] }}</span></div>
                             </div>
                             <div class="flex mt-2 justify-between text-[#73b9bc] text-xs">
                                 <div>Won</div>
@@ -743,7 +746,8 @@
                         </div>
                         <div class="basis-1/4 bg-[#002729] p-2">
                             <div class="h-full border-r-[2px] border-[#ff755e]"><h3
-                                    class="text-center text-sm text-[#ff755e] pt-5"> 26% <br> Accuracy </h3></div>
+                                    class="text-center text-sm text-[#ff755e] pt-5"> {{ $player->payload['duels_success_rate'] }}% <br>
+                                    Accuracy </h3></div>
                         </div>
                     </div>
                 </div>
@@ -751,12 +755,12 @@
                 <div class="grid grid-cols-2 gap-2 mt-3">
                     <div class="bg-[#002729] flex rounded">
                         <div class="bg-[#002f31] pt-4 px-5 pb-8 border-r-[2px] border-[#093545]">
-                            <h3 class="text-white text-l text-center">12 <br> Carries</h3>
+                            <h3 class="text-white text-l text-center">{{ $player->payload['carries'] }} <br> Carries</h3>
                         </div>
                         <div class="grow p-2">
                             <div class="h-full border-r-[2px] border-[#7aff87]">
                                 <h3 class="text-center text-sm text-[#7aff87] pt-5">
-                                    0.5
+                                    {{ $player->payload['carries_per_90_minutes'] }}
                                     <br>
                                     / 90 mins
                                 </h3>
@@ -765,12 +769,12 @@
                     </div>
                     <div class="bg-[#002729] flex rounded">
                         <div class="bg-[#002f31] pt-4 px-3 pb-8 border-r-[2px] border-[#093545]">
-                            <h3 class="text-white text-l text-center">12 <br> Touches <br> in The box</h3>
+                            <h3 class="text-white text-l text-center"> {{ $player->payload['touches_in_the_box'] }} <br> Touches <br> in The box</h3>
                         </div>
                         <div class="grow p-2">
                             <div class="h-full border-r-[2px] border-[#7aff87]">
                                 <h3 class="text-center text-sm text-[#7aff87] pt-5">
-                                    0.5
+                                    {{ $player->payload['touches_per_90_minutes'] }}
                                     <br>
                                     / 90 mins
                                 </h3>
@@ -783,13 +787,13 @@
                     <div>
                         <div class="grid grid-cols-4">
                             <h3 class="text-white text-center col-start-2 col-end-3 flex flex-col">
-                                <span class="text-[100px]">12</span>
+                                <span class="text-[100px]">{{ $player->payload['passes_intercepted'] }}</span>
                                 <span class="-mt-8 text-2xl">Interceptions</span>
                             </h3>
                             <div class="col-start-4 bg-[#002729] p-1">
                                 <div class="h-[170px] border-r-[1px] border-[#7aff87] flex flex-col justify-center">
                                     <h3 class="text-center text-sm text-[#7aff87] pt-2">
-                                        0.5
+                                        {{ $player->payload['interceptions_per_90_minutes'] }}
                                         <br>
                                         / 90 mins
                                     </h3>
@@ -802,12 +806,12 @@
                     <div class="grid grid-cols-2 gap-3 mt-5">
                         <div class="bg-[#002729] flex rounded">
                             <div class="bg-[#002f31] pt-4 px-5 pb-8 border-r-[2px] border-[#093545]">
-                                <h3 class="text-white text-l text-center">9 <br> Dribbles</h3>
+                                <h3 class="text-white text-l text-center">{{ $player->payload['dribbled_against_attempts'] }} <br> Dribbles</h3>
                             </div>
                             <div class="grow p-2">
                                 <div class="h-full border-r-[2px] border-[#7aff87]">
                                     <h3 class="text-center text-sm text-[#7aff87] pt-5">
-                                        0.5
+                                        {{ $player->payload['interceptions_per_90_minutes'] }}
                                         <br>
                                         / 90 mins
                                     </h3>
@@ -816,12 +820,12 @@
                         </div>
                         <div class="bg-[#002729] flex rounded">
                             <div class="bg-[#002f31] pt-4 px-5 pb-8 border-r-[2px] border-[#093545]">
-                                <h3 class="text-white text-l text-center">9 <br> Passes</h3>
+                                <h3 class="text-white text-l text-center">{{ $player->payload['dribbled_against_attempts'] }} <br> Passes</h3>
                             </div>
                             <div class="grow p-2">
                                 <div class="h-full border-r-[2px] border-[#7aff87]">
                                     <h3 class="text-center text-sm text-[#7aff87] pt-5">
-                                        0.5
+                                        0
                                         <br>
                                         / 90 mins
                                     </h3>
@@ -835,19 +839,20 @@
                     <div class="flex">
                         <div class="basis-3/4 p-4">
                             <div class="flex justify-between">
-                                <h3 class="text-white">12 Duels</h3>
-                                <h3><span class="text-white">0.5</span> <span class="text-gray-600">/ 90mins</span></h3>
+                                <h3 class="text-white">{{ $player->payload['tackles'] }} Tackles</h3>
+                                <h3><span class="text-white">0.5</span> <span class="text-gray-600">0/
+                                        90mins</span></h3>
                             </div>
                             <div class="flex mt-5 text-white">
                                 <div class="h-[25px] basis-2/3 rounded-1 border-1 bg-[#38b745] rounded-l-full"><span
-                                        class="p-3">3</span></div>
+                                        class="p-3">0</span></div>
                                 <div
                                     class="h-[25px] basis-1/3 rounded-1 border-1 bg-[#d9513b] rounded-r-full text-right">
-                                    <span class="p-3">9</span></div>
+                                    <span class="p-3">0</span></div>
                             </div>
                             <div class="flex mt-2 justify-between text-[#73b9bc] text-xs">
-                                <div>Won</div>
-                                <div>Lost</div>
+                                <div>Intercepted</div>
+                                <div>Unsuccessful</div>
                             </div>
                         </div>
                         <div class="basis-1/4 bg-[#002729] p-2">
@@ -861,8 +866,9 @@
                     <div class="flex">
                         <div class="basis-3/4 p-4">
                             <div class="flex justify-between">
-                                <h3 class="text-white">12 Duels</h3>
-                                <h3><span class="text-white">0.5</span> <span class="text-gray-600">/ 90mins</span></h3>
+                                <h3 class="text-white">12 Defends Dribbles</h3>
+                                <h3><span class="text-white">0.5</span> <span class="text-gray-600">0.5/
+                                        90mins</span></h3>
                             </div>
                             <div class="flex mt-5 text-white">
                                 <div class="h-[25px] basis-2/3 rounded-1 border-1 bg-[#38b745] rounded-l-full"><span
@@ -872,8 +878,8 @@
                                     <span class="p-3">9</span></div>
                             </div>
                             <div class="flex mt-2 justify-between text-[#73b9bc] text-xs">
-                                <div>Won</div>
-                                <div>Lost</div>
+                                <div>Intercepted</div>
+                                <div>Unsuccessful</div>
                             </div>
                         </div>
                         <div class="basis-1/4 bg-[#002729] p-2">

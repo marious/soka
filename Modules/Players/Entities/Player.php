@@ -31,8 +31,11 @@ class Player extends Model implements HasMedia
     /**
      * @var array
      */
-    protected $fillable = ['team_id', 'name', 'dob', 'position', 'height', 'matches', 'soka_score', 'attacking', 'defensive', 'passing', 'possession', 'created_at', 'updated_at', 'age'];
+    protected $fillable = ['team_id', 'name', 'dob', 'position', 'height', 'matches', 'soka_score', 'attacking', 'defensive', 'passing', 'possession', 'created_at', 'updated_at', 'age', 'payload'];
 
+    protected $casts = [
+        'payload' => 'array',
+    ];
 
     public function team()
     {

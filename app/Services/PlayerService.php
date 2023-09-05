@@ -27,18 +27,20 @@ class PlayerService
                 }
             }
         }
-    $searchItems = collect($search['searchItems'])->except(['g', 'd', 'm', 'f', 'sort_type', 'sort_by'])->toArray();
-
-        $players = Player::with('team')
-            ->where(count($searchItems) ? $searchItems : [])
+        $searchItems = collect($search['searchItems'])->except(['g', 'd', 'm', 'f', 'sort_type', 'sort_by'])->toArray();
+        $query = Player::with(['team', 'media'])
             ->when(count($positions), function ($query) use ($positions) {
                 $query->whereIn('position', $positions);
             })
-            ->when(isset($search['searchItems']) && isset($search['searchItems']['sort_by']), function ($query) use
-    ($search) {
+            ->when(isset($search['searchItems']) && isset($search['searchItems']['sort_by']), function ($query) use ($search) {
                 $query->orderBy($search['searchItems']['sort_by'], $search['searchItems']['sort_type']);
-            })
-            ->paginate(20);
-        return $players;
+            });
+
+        foreach ($searchItems as $key => $value) {
+            $query->where($key, '>=', $value)
+                ->orderBy($key);
+        }
+
+        return $query->paginate(20);
     }
 }
