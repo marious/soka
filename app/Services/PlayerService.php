@@ -41,7 +41,7 @@ class PlayerService
             if ($key === 'age') {
                 $query->whereRaw('(DATEDIFF("' . date('Y-m-d') . '",dob)/365) >= ' . $value)
                     ->when(! request()->has('sort_by'), function ($query) {
-                        $query->orderBy('dob', 'DESC');
+                        $query->orderBy('dob', 'ASC');
                     });
             } else {
                 $query->where($key, '>=', $value)
