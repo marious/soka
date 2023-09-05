@@ -21,7 +21,7 @@
                 @if($customBody)
                   @include($customBodyView)
                 @else
-                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-600 bg-white dark:bg-gray-700">
+                    <table class="border-separate border-spacing-0 min-w-full divide-y divide-gray-200 dark:divide-gray-600 bg-white dark:bg-gray-700">
                         @unless($headless)
                             @isset($head)
                                 {{ $head }}

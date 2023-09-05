@@ -47,7 +47,6 @@ class add_payload_to_players extends Command
             "duels_lost" => 30,
             "key_passes" => 0,
             "receptions" => 150,
-            "soka_score" => 79,
             "team_color" => "black",
             "team_draws" => 1,
             "team_goals" => 7,
@@ -129,16 +128,16 @@ class add_payload_to_players extends Command
 
         $data = [];
 
-        foreach ($players as $player) {
-            foreach ($payload as $key => $value) {
-                if (is_string($value)) {
-                    $data[$key] = $value;
-                } else {
-                    $data[$key] = (float)$value + mt_rand(1, 5);
+        foreach (Player::all()->chunk(20) as $players) {
+            foreach ($players as $player) {
+                $playerData = [];
+                foreach ($payload as $key => $value) {
+                    $playerData[$key] = is_string($value) ? $value : ($value + mt_rand(2, 6));
                 }
+                $player->payload = $playerData;
+                $player->save();
             }
-            $player->payload = $data;
-            $player->save();
         }
+
     }
 }

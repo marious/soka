@@ -47,10 +47,10 @@ class Player extends Model implements HasMedia
         return $this->hasMany(PlayerVideo::class);
     }
 
-//    public function getAgeAttribute()
-//    {
-//        return Carbon::parse($this->dob)->age;
-//    }
+    public function getAgeAttribute()
+    {
+        return Carbon::parse($this->dob)->age;
+    }
 
     public function getImageAttribute()
     {

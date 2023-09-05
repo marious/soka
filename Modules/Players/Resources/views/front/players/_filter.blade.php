@@ -40,7 +40,7 @@
     </div>
 </x-splade-data>
 
-<x-splade-data default="{g: true, d: true, m: true, f: true, active: 'fill-lime-300', inactive: 'fill-slate-700'}">
+<x-splade-data default="{g: false, d: false, m: false, f: false, active: 'fill-lime-300', inactive: 'fill-slate-700'}">
     <div class="filter w-10/12 mx-auto mb-8">
         <p class="text-sm mb-2">Position</p>
         <div class="flex relative">
@@ -66,9 +66,9 @@
                 handleFormSubmit(form.$all)">
                     <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve">
                                 <g id="XMLID_00000093156248264949356020000012658668346877317530_">
-                                    <path v-bind:class="data.g ? data.active : data.inactive"
+                                    <path v-bind:class="form.position.g ? data.active : data.inactive"
                                           d="M126.3 15.8 182 0c27.4 32.5 118 35.7 148.2.6L332 0l58.9 17c17.8 5.2 34.4 13.9 48.8 25.6l47 38.5-38.5 95L407 153c-14-7.9-30.2 7.7-29.9 23.3l-.3 335.7H106V152l-69 40-37-88 68.8-57.7c16.8-14.2 36.4-24.6 57.5-30.5z"/>
-                                    <path v-bind:class="data.g ? data.active : data.inactive"
+                                    <path v-bind:class="form.position.g ? data.active : data.inactive"
                                           d="M407 153v359h-30.2l.2-335.7c-.2-15.6 16-31.2 30-23.3zM512 102l-36 90-27.8-15.7 38.5-95.1z"/>
                                 </g>
                             </svg>
@@ -79,10 +79,10 @@
                 handleFormSubmit(form.$all)">
                     <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve">
                                 <g id="XMLID_00000093156248264949356020000012658668346877317530_">
-                                    <path :class="data.d ? data.active : data.inactive"
+                                    <path :class="form.position.d ? data.active : data.inactive"
                                           d="M126.3 15.8 182 0c27.4 32.5 118 35.7 148.2.6L332 0l58.9 17c17.8 5.2 34.4
                                            13.9 48.8 25.6l47 38.5-38.5 95L407 153c-14-7.9-30.2 7.7-29.9 23.3l-.3 335.7H106V152l-69 40-37-88 68.8-57.7c16.8-14.2 36.4-24.6 57.5-30.5z"/>
-                                    <path :class="data.d ? data.active : data.inactive"
+                                    <path :class="form.position.d ? data.active : data.inactive"
                                           d="M407 153v359h-30.2l.2-335.7c-.2-15.616-31.2 30-23.3zM512 102l-36 90-27.8-15.7 38.5-95.1z"/>
                                 </g>
                             </svg>
@@ -93,10 +93,12 @@
                 handleFormSubmit(form.$all)">
                     <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve">
                                 <g id="XMLID_00000093156248264949356020000012658668346877317530_">
-                                    <path :class="data.m ? data.active : data.inactive" d="M126.3 15.8 182 0c27.4 32.5
+                                    <path :class="form.position.m ? data.active : data.inactive" d="M126.3 15.8 182
+                                    0c27.4 32.5
                                     118 35.7
                                      148.2.6L332 0l58.9 17c17.8 5.2 34.4 13.9 48.8 25.6l47 38.5-38.5 95L407 153c-14-7.9-30.2 7.7-29.9 23.3l-.3 335.7H106V152l-69 40-37-88 68.8-57.7c16.8-14.2 36.4-24.6 57.5-30.5z"/>
-                                    <path :class="data.m ? data.active : data.inactive" d="M407 153v359h-30.2l.2-335.7c-
+                                    <path :class="form.position.m ? data.active : data.inactive" d="M407 153v359h-30.2l
+                                    .2-335.7c-
                                     .2-15.6 16-31.2 30-23.3zM512 102l-36 90-27.8-15.7 38.5-95.1z"/>
                                 </g>
                             </svg>
@@ -107,10 +109,12 @@
                 handleFormSubmit(form.$all)">
                     <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve">
                                 <g id="XMLID_00000093156248264949356020000012658668346877317530_">
-                                    <path :class="data.f ? data.active : data.inactive" d="M126.3 15.8 182 0c27.4 32.5
+                                    <path :class="form.position.f ? data.active : data.inactive" d="M126.3 15.8 182
+                                    0c27.4 32.5
                                     118 35.7
                                      148.2.6L332 0l58.9 17c17.8 5.2 34.4 13.9 48.8 25.6l47 38.5-38.5 95L407 153c-14-7.9-30.2 7.7-29.9 23.3l-.3 335.7H106V152l-69 40-37-88 68.8-57.7c16.8-14.2 36.4-24.6 57.5-30.5z"/>
-                                    <path :class="data.f ? data.active : data.inactive" d="M407 153v359h-30.2l.2-335.7c-
+                                    <path :class="form.position.f ? data.active : data.inactive" d="M407 153v359h-30.2l
+                                    .2-335.7c-
                                     .2-15.6
                                     16-31.2 30-23.3zM512 102l-36 90-27.8-15.7 38.5-95.1z"/>
                                 </g>

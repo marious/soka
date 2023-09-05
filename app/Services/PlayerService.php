@@ -33,12 +33,23 @@ class PlayerService
                 $query->whereIn('position', $positions);
             })
             ->when(isset($search['searchItems']) && isset($search['searchItems']['sort_by']), function ($query) use ($search) {
-                $query->orderBy($search['searchItems']['sort_by'], $search['searchItems']['sort_type']);
+                $sortBy =  $search['searchItems']['sort_by'] == 'age' ? 'dob': $search['searchItems']['sort_by'];
+                $query->orderBy($sortBy, $search['searchItems']['sort_type']);
             });
 
         foreach ($searchItems as $key => $value) {
-            $query->where($key, '>=', $value)
-                ->orderBy($key);
+            if ($key === 'age') {
+                $query->whereRaw('(DATEDIFF("' . date('Y-m-d') . '",dob)/365) >= ' . $value)
+                    ->when(! request()->has('sort_by'), function ($query) {
+                        $query->orderBy('dob', 'DESC');
+                    });
+            } else {
+                $query->where($key, '>=', $value)
+                    ->when(! request()->has('sort_by'), function ($query) use ($key) {
+                        $query->orderBy('key', 'DESC');
+                    });
+            }
+
         }
 
         return $query->paginate(20);

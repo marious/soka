@@ -6,9 +6,10 @@
                 'hover:bg-gray-100 dark:hover:bg-gray-600': table.striped,
                 'hover:bg-gray-50 dark:hover:bg-gray-800 ': !table.striped
             }"
+            class="tr-body"
         >
             @if($hasBulkActions = $table->hasBulkActions())
-                <td width="64" class="text-xs px-6 py-4">
+                <td width="64" class="text-xs px-6 py-4 border-b border-gray-200 dark:border-gray-500">
                     @php $itemPrimaryKey = $table->findPrimaryKey($item) @endphp
                     <input
                         @change="(e) => table.setSelectedItem(@js($itemPrimaryKey), e.target.checked)"
@@ -28,7 +29,10 @@
                         @click="(event) => table.visit(@js($table->rowLinks->get($itemKey)), @js($table->rowLinkType), event)"
                     @endif
                     v-show="table.columnIsVisible(@js($column->key))"
-                    class="whitespace-nowrap text-sm @if($loop->first && $hasBulkActions) pr-6 @else px-6 @endif py-4 @if($column->highlight) text-gray-900 dark:text-white font-medium @else text-gray-500 dark:text-gray-200 @endif @if($table->rowLinks->has($itemKey)) cursor-pointer @endif {{ $column->classes }}"
+                    :class="{
+                        'table_action':table.striped && @js($itemKey) % 2
+                    }"
+                    class="md:last:sticky last:w-0 table_shadow rtl:last:border-r last:border-l border-b border-gray-200 dark:border-gray-500 rtl:last:left-0 ltr:last:right-0 last:bg-white last:dark:bg-gray-800 table_action_hover whitespace-nowrap ltr:capitalize text-sm @if($loop->first && $hasBulkActions) pr-6 @else px-10 @endif py-4 @if($column->highlight) text-gray-900 dark:text-white font-medium @else text-gray-500 dark:text-gray-200 @endif @if($table->rowLinks->has($itemKey)) cursor-pointer @endif {{ $column->classes }}"
                 >
                     @isset(${'spladeTableCell' . $column->keyHash()})
                         {{ ${'spladeTableCell' . $column->keyHash()}($item, $itemKey) }}

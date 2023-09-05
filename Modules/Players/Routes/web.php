@@ -23,6 +23,12 @@ Route::middleware(['auth', 'splade', 'verified'])->name('admin.')->group(functio
     Route::post('admin/players', [\Modules\Players\Http\Controllers\PlayerController::class, 'store'])->name('players.store');
     Route::get('admin/players/{model}', [\Modules\Players\Http\Controllers\PlayerController::class, 'show'])->name('players.show');
     Route::get('admin/players/{model}/edit', [\Modules\Players\Http\Controllers\PlayerController::class, 'edit'])->name('players.edit');
+    Route::get('admin/players/{model}/extra', [\Modules\Players\Http\Controllers\PlayerExtraController::class, 'index'])
+        ->name
+    ('players.extra');
+    Route::post('admin/players/{model}/extra', [\Modules\Players\Http\Controllers\PlayerExtraController::class, 'store'])
+        ->name
+        ('players.extra.store');
     Route::post('admin/players/{model}', [\Modules\Players\Http\Controllers\PlayerController::class, 'update'])->name('players.update');
     Route::delete('admin/players/{model}', [\Modules\Players\Http\Controllers\PlayerController::class, 'destroy'])->name('players.destroy');
 });

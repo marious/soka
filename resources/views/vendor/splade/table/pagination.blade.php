@@ -1,12 +1,14 @@
 <nav role="navigation" aria-label="{{ __('Pagination Navigation') }}" class="flex items-center justify-between px-4 sm:px-0 py-3">
-    <div class="flex justify-between flex-1 md:hidden">
+    <div class="flex justify-between flex-1 gap-2 md:hidden">
         @if ($paginator->onFirstPage())
-            <span class="relative inline-flex items-center px-4 py-2 text-xs sm:text-sm font-medium text-gray-500 ltr:mr-4 dark:text-gray-200 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 cursor-default leading-5 rounded-md">
+            <span class="relative inline-flex items-center px-4 py-2 text-xs sm:text-sm font-medium text-gray-500 dark:text-gray-200 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 cursor-default leading-5 rounded-md">
                 {!! __('pagination.previous') !!}
+                
             </span>
         @else
-            <Link keep-modal dusk="pagination-simple-previous" href="{{ $paginator->previousPageUrl() }}" class="relative ltr:mr-4 inline-flex items-center px-4 py-2 text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 border dark:border-gray-600 border-gray-300 leading-5 rounded-md hover:text-gray-500 focus:outline-none focus:ring ring-gray-300 focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
+            <Link keep-modal dusk="pagination-simple-previous" href="{{ $paginator->previousPageUrl() }}" class="relative  inline-flex items-center px-4 py-2 text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 border dark:border-gray-600 border-gray-300 leading-5 rounded-md hover:text-gray-500 focus:outline-none focus:ring ring-gray-300 focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
                 {!! __('pagination.previous') !!}
+            
             </Link>
         @endif
 
@@ -15,10 +17,12 @@
         @if ($paginator->hasMorePages())
             <Link keep-modal dusk="pagination-simple-next" href="{{ $paginator->nextPageUrl() }}" class="relative  rtl:ml-4 inline-flex items-center px-4 py-2 ml-3 text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 border border-gray-300  dark:border-gray-600 leading-5 rounded-md hover:text-gray-500 focus:outline-none focus:ring ring-gray-300 focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
                 {!! __('pagination.next') !!}
+                
             </Link>
         @else
             <span class="relative inline-flex items-center px-4 py-2 text-xs sm:text-sm font-medium text-gray-500  rtl:ml-4 bg-white border border-gray-300 cursor-default leading-5 rounded-md">
-                {!! __('pagination.next') !!}
+                {!! __('pagination.next') !!} 
+                
             </span>
         @endif
     </div>

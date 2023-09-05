@@ -18,6 +18,23 @@
             </h3>
 
             @foreach($table->getBulkActions() as $bulkAction)
+                @if ($bulkAction->label === 'Assign To Group')
+                    <button
+                        class="text-left w-full px-4 py-2 text-sm text-gray-700 dark:text-white dark:hover:bg-gray-600 dark:hover:text-white hover:bg-gray-50 hover:text-gray-900 font-normal"
+                        v-if="table.hasSelectedItems"
+                        @click.prevent="table.performBulkAction(
+                        @js(route('admin.accounts.groups')),
+                        @js($bulkAction->confirm),
+                        @js($bulkAction->confirmText),
+                        @js($bulkAction->confirmButton),
+                        @js($bulkAction->cancelButton),
+                        @js($bulkAction->cancelButton),
+                        @js($bulkAction->requirePassword)
+                    )"
+                    >
+                        {{ __('Assign To Group') }}
+                    </button>
+                @else
                 <button
                     v-if="table.hasSelectedItems"
                     class="text-left w-full px-4 py-2 text-sm text-gray-700 dark:text-white dark:hover:bg-gray-600 dark:hover:text-white hover:bg-gray-50 hover:text-gray-900 font-normal"
@@ -33,6 +50,7 @@
                     dusk="action.{{ $bulkAction->getSlug() }}">
                     {{ $bulkAction->label }}
                 </button>
+                @endif
             @endforeach
 
             @if($table->hasExports() && $table->hasBulkActions())
@@ -57,3 +75,4 @@
         </div>
     </div>
 </x-splade-component>
+
