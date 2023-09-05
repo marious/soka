@@ -31,6 +31,7 @@ class PlayerResource extends JsonResource
             'passing' => $this->passing,
             'possession' => $this->possession,
             'shirtNumber' => random_int(1, 30),
+            'team_color' => $this->payload['team_color'],
         ];
     }
 }
