@@ -13,8 +13,10 @@
                :max="data.max"
                :value="form.soka_score"
                v-model="form.soka_score"
-               class="rounded-lg
-            appearance-none bg-cyan-900/50 h-1.5 w-full bg-gradient-to-r from-lime-300 to-lime-500 bg-no-repeat" :class="'bg-' + direction + '-top'" x-on:input="inputValue = filtersokascore.value;" :style="{backgroundSize: (max-inputValue) + '%'}" />
+               style="accent-color: #84cc16"
+               class="rounded-lg h-2 w-full"
+               :class="'bg-' + direction + '-top'" x-on:input="inputValue = filtersokascore.value;"
+               v-bind:style="{backgroundSize: (max-inputValue) + '%'}" />
         <p class="text-xs text-right">@{{ form.soka_score }}%</p>
     </div>
 </x-splade-data>
@@ -29,8 +31,8 @@
                :min="data.min"
                :max="data.max"
                :value="form.age"
-               class="rounded-lg appearance-none bg-cyan-900/50
-                       h-1.5 w-full bg-gradient-to-r from-lime-300 to-lime-500 bg-no-repeat"
+               style="accent-color: #84cc16"
+               class="rounded-lg h-2 w-full"
                v-bind:class="`bg-${data.direction}-top`"
                v-model="form.age"
                v-bind:style="`{backgroundSize: ${data.inputValue}%}`" />
@@ -136,8 +138,9 @@
                    :max="data.max"
                    :value="form.height"
                    v-model="form.height"
-                   class="rounded-lg appearance-none bg-cyan-900/50
-                       h-1.5 w-full bg-gradient-to-r from-lime-300 to-lime-500 bg-no-repeat" :class="'bg-' + direction + '-top'" x-on:input="inputValue = filterheight.value;" :style="{backgroundSize: (max-inputValue) + '%'}" />
+                   style="accent-color: #84cc16"
+                   class="rounded-lg h-2 w-full"
+                    :class="'bg-' + direction + '-top'" x-on:input="inputValue = filterheight.value;" :style="{backgroundSize: (max-inputValue) + '%'}" />
             <p class="text-xs text-right">
                 <span v-text="form.height ? `${form.height} cm` : ''"></span>
             </p>

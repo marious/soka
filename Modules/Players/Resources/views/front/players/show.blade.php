@@ -952,7 +952,6 @@
                 </div>
 
                 <div class="flex justify-center">
-                    <img src="{{ url('assets/images/img-4.png') }}" class="mt-24">
                 </div>
             </div>
         </div>
